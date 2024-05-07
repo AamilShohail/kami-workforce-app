@@ -1,16 +1,16 @@
 import { Component, OnInit, VERSION } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterOutlet } from '@angular/router';
+import { HomeComponent } from './components/home/home.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, HomeComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  // may change this to your app's title
-  title = 'custom-angular-framework';
+  title = 'Kami Workforce App';
 
   constructor(private titleService: Title) {}
 
