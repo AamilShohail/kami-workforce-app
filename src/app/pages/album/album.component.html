@@ -1,4 +1,8 @@
-<h1>Albums</h1>
-@for (item of albums; track $index) {
-<p>{{ item.title }}</p>
-}
+<div class="container">
+  <h1>Albums</h1>
+  <div class="container__album-container">
+    @for (item of albums; track $index) {
+    <app-card [title]="item.title" />
+    }
+  </div>
+</div>

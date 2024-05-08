@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CardComponent } from '@app/components/generic/card/card.component';
 import { Album } from '@app/models/album.model';
 import { AlbumService } from '@app/services/album.service';
 import { take } from 'rxjs';
@@ -6,7 +7,7 @@ import { take } from 'rxjs';
 @Component({
   selector: 'app-album',
   standalone: true,
-  imports: [],
+  imports: [CardComponent],
   providers: [AlbumService],
   templateUrl: './album.component.html',
   styleUrl: './album.component.scss',
@@ -26,6 +27,7 @@ export class AlbumComponent implements OnInit {
       .pipe(take(1))
       .subscribe((albums: Album[]) => {
         this.albums = albums;
+        console.log(albums);
       });
   }
 }

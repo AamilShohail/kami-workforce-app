@@ -1,5 +1,3 @@
-<h1>Posts</h1>
-@for (item of posts; track $index) {
-<h2>{{ item.title }}</h2>
-<p>{{ item.body }}</p>
-}
+<div class="post-container">
+  <app-grid [colDefs]="colDefs" [rowData]="posts" />
+</div>
