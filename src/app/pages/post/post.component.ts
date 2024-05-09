@@ -4,6 +4,7 @@ import { Post } from '@app/models/posts.model';
 import { PostService } from '@app/services/post.service';
 import { take } from 'rxjs';
 import { ColDef } from 'ag-grid-community';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -16,12 +17,19 @@ import { ColDef } from 'ag-grid-community';
 export class PostComponent implements OnInit {
   colDefs!: ColDef<Post>[];
   posts!: Post[];
+  post!: Post;
+  postId!: number;
 
-  constructor(private postService: PostService) {}
+  constructor(
+    private postService: PostService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.subscribeToPosts();
     this.createColumns();
+    this.subscribeToActivatedRoutes();
+    this.subscribeToAlbumById();
   }
 
   private subscribeToPosts(): void {
@@ -39,5 +47,20 @@ export class PostComponent implements OnInit {
       { field: 'title', filter: true, floatingFilter: true },
       { field: 'body', filter: true, floatingFilter: true },
     ];
+  }
+
+  private subscribeToActivatedRoutes(): void {
+    this.activatedRoute.paramMap.pipe(take(1)).subscribe((params) => {
+      this.postId = Number(params.get('id'));
+    });
+  }
+
+  private subscribeToAlbumById(): void {
+    this.postService
+      .getPostById(this.postId)
+      .pipe(take(1))
+      .subscribe((albums: Post) => {
+        this.post = albums;
+      });
   }
 }

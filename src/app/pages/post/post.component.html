@@ -1,3 +1,13 @@
 <div class="post-container">
-  <app-grid [colDefs]="colDefs" [rowData]="posts" />
+  @if (!postId) {
+  <h1>Posts</h1>
+  <app-grid
+    [colDefs]="colDefs"
+    [rowData]="posts"
+    routerLink="/kami-workforce/home/posts"
+  />
+  } @else {
+  <h1>Tile: {{ post.title }}</h1>
+  <p>{{ post.body }}</p>
+  }
 </div>

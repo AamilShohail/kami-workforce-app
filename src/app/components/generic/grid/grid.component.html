@@ -1,4 +1,13 @@
 <div class="grid-container">
+  <div class="grid-container__actions">
+    <button
+      [routerLink]="routerLink"
+      class="btn btn-secondary"
+      [disabled]="disable"
+    >
+      Go to post
+    </button>
+  </div>
   <ag-grid-angular
     class="ag-theme-quartz"
     style="width: 1000px; height: 500px"
@@ -7,5 +16,6 @@
     rowGroupPanelShow="always"
     [pagination]="true"
     [rowSelection]="'single'"
+    (selectionChanged)="onRowSelectionChange($event)"
   />
 </div>

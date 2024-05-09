@@ -1,8 +1,15 @@
 <div class="container">
   <h1>Albums</h1>
+  @if (!albumId) {
   <div class="container__album-container">
     @for (item of albums; track $index) {
-    <app-card [title]="item.title" />
+    <app-card
+      [title]="item.title"
+      routerLink="/kami-workforce/home/albums/{{ item.id }}"
+    />
     }
   </div>
+  } @else {
+  <h1>Album Title: {{ album.title }}</h1>
+  }
 </div>
