@@ -4,10 +4,11 @@
   <app-grid
     [colDefs]="colDefs"
     [rowData]="posts"
-    routerLink="/kami-workforce/home/posts"
+    (rowClick)="rowClick($event)"
+    [routerLink]="routerLink"
   />
   } @else {
-  <h1>Tile: {{ post.title }}</h1>
+  <h1>Title: {{ post.title }}</h1>
   <p>{{ post.body }}</p>
   }
 </div>

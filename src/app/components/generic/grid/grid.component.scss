@@ -6,5 +6,9 @@
     &__actions {
         display: flex;
         justify-content: flex-end;
+
+        &--action-button {
+            margin: 5px;
+        }
     }
 }

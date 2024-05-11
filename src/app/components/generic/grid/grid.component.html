@@ -2,10 +2,10 @@
   <div class="grid-container__actions">
     <button
       [routerLink]="routerLink"
-      class="btn btn-secondary"
+      class="btn btn-primary grid-container__actions--action-button"
       [disabled]="disable"
     >
-      Go to post
+      {{ navigationButtonText ?? "Go" }}
     </button>
   </div>
   <ag-grid-angular

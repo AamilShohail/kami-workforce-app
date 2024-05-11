@@ -4,7 +4,7 @@ import { Post } from '@app/models/posts.model';
 import { PostService } from '@app/services/post.service';
 import { EMPTY, switchMap, take } from 'rxjs';
 import { ColDef } from 'ag-grid-community';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -18,6 +18,7 @@ export class PostComponent implements OnInit {
   colDefs!: ColDef<Post>[];
   posts!: Post[];
   post!: Post;
+  routerLink!: string;
 
   constructor(
     private postService: PostService,
@@ -28,6 +29,10 @@ export class PostComponent implements OnInit {
     this.subscribeToPosts();
     this.createColumns();
     this.subscribeToPostById();
+  }
+
+  rowClick(post: Post): void {
+    this.setupRouterLink(post);
   }
 
   private subscribeToPosts(): void {
@@ -50,9 +55,10 @@ export class PostComponent implements OnInit {
   private subscribeToPostById(): void {
     this.activatedRoute.paramMap
       .pipe(
-        switchMap((params) => {
-          if (Number(params.get('postId'))) {
-            return this.postService.getPostById(Number(params.get('postId')));
+        switchMap((params: ParamMap) => {
+          const postIdFromRoute = Number(params.get('postId'));
+          if (postIdFromRoute) {
+            return this.postService.getPostById(postIdFromRoute);
           }
           return EMPTY;
         })
@@ -60,5 +66,13 @@ export class PostComponent implements OnInit {
       .subscribe((post: Post) => {
         this.post = post;
       });
+  }
+
+  private setupRouterLink(post: Post): void {
+    this.activatedRoute.parent?.paramMap.subscribe((params: ParamMap) => {
+      this.routerLink = `/kami-workforce/user/${Number(
+        params.get('userId')
+      )}/home/posts/${post.id}`;
+    });
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AgGridAngular } from 'ag-grid-angular';
 import { ColDef, SelectionChangedEvent } from 'ag-grid-community';
@@ -14,6 +14,9 @@ export class GridComponent {
   @Input() rowData: any;
   @Input() colDefs!: ColDef[];
   @Input() routerLink!: string;
+  @Input() navigationButtonText!: string | null;
+
+  @Output() rowClick = new EventEmitter<any>();
 
   disable = true;
 
@@ -23,5 +26,6 @@ export class GridComponent {
     this.currentSelectedNode = event.api.getSelectedNodes()[0].data;
     this.routerLink = `${this.routerLink}/${this.currentSelectedNode.id}`;
     this.disable = !this.currentSelectedNode;
+    this.rowClick.emit(this.currentSelectedNode);
   }
 }

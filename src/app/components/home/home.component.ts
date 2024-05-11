@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { ShellComponent } from '../layout/shell/shell.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ShellComponent],
+  imports: [RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
