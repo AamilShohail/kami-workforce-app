@@ -1,5 +1,5 @@
 <div class="post-container">
-  @if (!postId) {
+  @if (!currentSelectedPost.id) {
   <h1>Posts</h1>
   <app-grid
     [colDefs]="colDefs"
@@ -7,7 +7,7 @@
     routerLink="/kami-workforce/home/posts"
   />
   } @else {
-  <h1>Tile: {{ post.title }}</h1>
-  <p>{{ post.body }}</p>
+  <h1>Tile: {{ currentSelectedPost.title }}</h1>
+  <p>{{ currentSelectedPost.body }}</p>
   }
 </div>

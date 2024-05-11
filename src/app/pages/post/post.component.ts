@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { GridComponent } from '@app/components/generic/grid/grid.component';
 import { Post } from '@app/models/posts.model';
 import { PostService } from '@app/services/post.service';
-import { take } from 'rxjs';
+import { switchMap, take } from 'rxjs';
 import { ColDef } from 'ag-grid-community';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRouterService } from '@app/services/activated-router.service';
 
 @Component({
   selector: 'app-post',
@@ -17,19 +17,17 @@ import { ActivatedRoute } from '@angular/router';
 export class PostComponent implements OnInit {
   colDefs!: ColDef<Post>[];
   posts!: Post[];
-  post!: Post;
-  postId!: number;
+  currentSelectedPost!: Post;
 
   constructor(
     private postService: PostService,
-    private activatedRoute: ActivatedRoute
+    private activatedRouterService: ActivatedRouterService
   ) {}
 
   ngOnInit(): void {
     this.subscribeToPosts();
     this.createColumns();
-    this.subscribeToActivatedRoutes();
-    this.subscribeToAlbumById();
+    this.subscribeToPostById();
   }
 
   private subscribeToPosts(): void {
@@ -49,18 +47,16 @@ export class PostComponent implements OnInit {
     ];
   }
 
-  private subscribeToActivatedRoutes(): void {
-    this.activatedRoute.paramMap.pipe(take(1)).subscribe((params) => {
-      this.postId = Number(params.get('id'));
-    });
-  }
-
-  private subscribeToAlbumById(): void {
-    this.postService
-      .getPostById(this.postId)
-      .pipe(take(1))
-      .subscribe((albums: Post) => {
-        this.post = albums;
+  private subscribeToPostById(): void {
+    this.activatedRouterService
+      .getActivatedId()
+      .pipe(
+        switchMap((activatedId: number) => {
+          return this.postService.getPostById(activatedId);
+        })
+      )
+      .subscribe((post: Post) => {
+        this.currentSelectedPost = post;
       });
   }
 }
