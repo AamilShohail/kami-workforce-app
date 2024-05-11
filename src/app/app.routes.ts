@@ -21,7 +21,7 @@ export const routes: Routes = [
           import('./pages/album/album.component').then((m) => m.AlbumComponent),
       },
       {
-        path: 'albums/:id',
+        path: 'albums/:albumId',
         loadComponent: () =>
           import('./pages/album/album.component').then((m) => m.AlbumComponent),
       },
@@ -31,7 +31,7 @@ export const routes: Routes = [
           import('./pages/post/post.component').then((m) => m.PostComponent),
       },
       {
-        path: 'posts/:id',
+        path: 'posts/:postId',
         loadComponent: () =>
           import('./pages/post/post.component').then((m) => m.PostComponent),
       },

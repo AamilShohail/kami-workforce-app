@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GridComponent } from '@app/components/generic/grid/grid.component';
 import { Post } from '@app/models/posts.model';
 import { PostService } from '@app/services/post.service';
-import { take } from 'rxjs';
+import { EMPTY, switchMap, take } from 'rxjs';
 import { ColDef } from 'ag-grid-community';
 import { ActivatedRoute } from '@angular/router';
 
@@ -18,7 +18,6 @@ export class PostComponent implements OnInit {
   colDefs!: ColDef<Post>[];
   posts!: Post[];
   post!: Post;
-  postId!: number;
 
   constructor(
     private postService: PostService,
@@ -28,8 +27,7 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {
     this.subscribeToPosts();
     this.createColumns();
-    this.subscribeToActivatedRoutes();
-    this.subscribeToAlbumById();
+    this.subscribeToPostById();
   }
 
   private subscribeToPosts(): void {
@@ -49,18 +47,18 @@ export class PostComponent implements OnInit {
     ];
   }
 
-  private subscribeToActivatedRoutes(): void {
-    this.activatedRoute.paramMap.pipe(take(1)).subscribe((params) => {
-      this.postId = Number(params.get('id'));
-    });
-  }
-
-  private subscribeToAlbumById(): void {
-    this.postService
-      .getPostById(this.postId)
-      .pipe(take(1))
-      .subscribe((albums: Post) => {
-        this.post = albums;
+  private subscribeToPostById(): void {
+    this.activatedRoute.paramMap
+      .pipe(
+        switchMap((params) => {
+          if (Number(params.get('postId'))) {
+            return this.postService.getPostById(Number(params.get('postId')));
+          }
+          return EMPTY;
+        })
+      )
+      .subscribe((post: Post) => {
+        this.post = post;
       });
   }
 }

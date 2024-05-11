@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CardComponent } from '@app/components/generic/card/card.component';
 import { Album } from '@app/models/album.model';
 import { AlbumService } from '@app/services/album.service';
-import { take } from 'rxjs';
+import { switchMap, take } from 'rxjs';
 
 @Component({
   selector: 'app-album',
@@ -25,7 +25,6 @@ export class AlbumComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribeToAlbums();
-    this.subscribeToActivatedRoutes();
     this.subscribeToAlbumById();
   }
 
@@ -35,22 +34,18 @@ export class AlbumComponent implements OnInit {
       .pipe(take(1))
       .subscribe((albums: Album[]) => {
         this.albums = albums;
-        console.log(albums);
       });
   }
 
-  private subscribeToActivatedRoutes(): void {
-    this.activatedRoute.paramMap.pipe(take(1)).subscribe((params) => {
-      this.albumId = Number(params.get('id'));
-    });
-  }
-
   private subscribeToAlbumById(): void {
-    this.albumService
-      .getAlbumById(this.albumId)
-      .pipe(take(1))
-      .subscribe((albums: Album) => {
-        this.album = albums;
+    this.activatedRoute.paramMap
+      .pipe(
+        switchMap((params) =>
+          this.albumService.getAlbumById(Number(params.get('albumId')))
+        )
+      )
+      .subscribe((album) => {
+        this.album = album;
       });
   }
 }
