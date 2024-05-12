@@ -1,0 +1,30 @@
+<div class="sidebar" [ngClass]="{ expanded: isExpanded }">
+  <div class="header">
+    <h1 class="title">Album</h1>
+    <button
+      class="toggle btn btn-outline-secondary"
+      (click)="handleSidebarToggle()"
+    >
+      <i class="bi bi-arrow-left-right"></i>
+    </button>
+  </div>
+  <div class="content">
+    <div class="link">
+      @for (item of navItems; track $index) {
+      <div
+        class="content"
+        [routerLink]="item.link"
+        [routerLinkActive]="'active'"
+      >
+        <div class="icon">
+          <i [class]="item.icon"></i>
+          <div class="title">{{ item.label }}</div>
+        </div>
+      </div>
+      }
+    </div>
+    <div class="footer">
+      <p>test</p>
+    </div>
+  </div>
+</div>

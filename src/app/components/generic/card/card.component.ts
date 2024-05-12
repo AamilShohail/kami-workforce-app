@@ -11,5 +11,5 @@ import { RouterModule } from '@angular/router';
 export class CardComponent {
   @Input() imgUrl!: string;
   @Input() title!: string;
-  @Input() routerLink!: string;
+  @Input() routerLink!: string | null;
 }

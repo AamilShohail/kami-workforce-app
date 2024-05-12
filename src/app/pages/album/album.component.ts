@@ -1,14 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { CardComponent } from '@app/components/generic/card/card.component';
 import { Album } from '@app/models/album.model';
 import { AlbumService } from '@app/services/album.service';
-import { switchMap, take } from 'rxjs';
+import { Observable, map, switchMap, take } from 'rxjs';
 
 @Component({
   selector: 'app-album',
   standalone: true,
-  imports: [CardComponent],
+  imports: [CardComponent, CommonModule],
   providers: [AlbumService],
   templateUrl: './album.component.html',
   styleUrl: './album.component.scss',
@@ -17,6 +18,7 @@ export class AlbumComponent implements OnInit {
   albums!: Album[];
   album!: Album;
   albumId!: number;
+  routerLink!: string;
 
   constructor(
     private albumService: AlbumService,
@@ -48,4 +50,14 @@ export class AlbumComponent implements OnInit {
         this.album = album;
       });
   }
+
+  setupRouterLink = (album: Album): Observable<string> | undefined =>
+    this.activatedRoute.parent?.paramMap.pipe(
+      take(1),
+      map((params: ParamMap) => {
+        return `/kami-workforce/user/${Number(
+          params.get('userId')
+        )}/home/albums/${album.id}`;
+      })
+    );
 }

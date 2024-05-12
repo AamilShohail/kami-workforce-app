@@ -43,6 +43,13 @@ export const routes: Routes = [
               ),
           },
           {
+            path: 'settings',
+            loadComponent: () =>
+              import('./pages/setting/setting.component').then(
+                (m) => m.SettingComponent
+              ),
+          },
+          {
             path: 'albums/:albumId',
             loadComponent: () =>
               import('./pages/album/album.component').then(
