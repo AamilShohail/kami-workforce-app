@@ -2,4 +2,9 @@
   [isExpanded]="sidebarExpanded"
   (toggleSidebar)="sidebarExpanded = !sidebarExpanded"
 />
+@if (currentUser) {
+<div class="title-header">
+  <h1>Hello {{ currentUser.name }}!</h1>
+</div>
+}
 <router-outlet />
