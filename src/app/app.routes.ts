@@ -55,6 +55,15 @@ export const routes: Routes = [
               import('./pages/album/album.component').then(
                 (m) => m.AlbumComponent
               ),
+            children: [
+              {
+                path: 'photos/:photoId',
+                loadComponent: () =>
+                  import('./pages/photo/photo.component').then(
+                    (m) => m.PhotoComponent
+                  ),
+              },
+            ],
           },
           {
             path: 'posts',
@@ -68,13 +77,6 @@ export const routes: Routes = [
             loadComponent: () =>
               import('./pages/post/post.component').then(
                 (m) => m.PostComponent
-              ),
-          },
-          {
-            path: 'photos',
-            loadComponent: () =>
-              import('./pages/photo/photo.component').then(
-                (m) => m.PhotoComponent
               ),
           },
         ],

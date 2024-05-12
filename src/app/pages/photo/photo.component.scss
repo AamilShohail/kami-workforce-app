@@ -1,4 +1,11 @@
-.img-container {
-    display: grid;
-    grid-template-columns: repeat(5, 300px)
+.container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+
+    &__img-container {
+        display: grid;
+        grid-template-columns: repeat(5, 300px)
+    }
 }
