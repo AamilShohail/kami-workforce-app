@@ -4,7 +4,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { CardComponent } from '@app/components/generic/card/card.component';
 import { Album } from '@app/models/album.model';
 import { AlbumService } from '@app/services/album.service';
-import { Observable, map, switchMap, take } from 'rxjs';
+import { EMPTY, Observable, map, switchMap, take } from 'rxjs';
 
 @Component({
   selector: 'app-album',
@@ -42,9 +42,15 @@ export class AlbumComponent implements OnInit {
   private subscribeToAlbumById(): void {
     this.activatedRoute.paramMap
       .pipe(
-        switchMap((params) =>
-          this.albumService.getAlbumById(Number(params.get('albumId')))
-        )
+        switchMap((params: ParamMap) => {
+          const albumIdFromRoute = Number(params.get('albumId'));
+          if (albumIdFromRoute) {
+            return this.albumService.getAlbumById(
+              Number(params.get('albumId'))
+            );
+          }
+          return EMPTY;
+        })
       )
       .subscribe((album) => {
         this.album = album;

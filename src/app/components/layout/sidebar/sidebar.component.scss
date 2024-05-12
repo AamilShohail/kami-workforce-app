@@ -1,11 +1,8 @@
 .sidebar {
     position: fixed;
     left: 0;
-    top: 0;
-
     height: 100vh;
     transition: 0.3s;
-
     width: 60px;
 
     &.expanded {
@@ -14,14 +11,6 @@
         .header {
             h1 {
                 margin-left: 0px;
-            }
-
-            .chevron {
-                margin-left: 0px;
-
-                &::before {
-                    transform: rotate(-135deg);
-                }
             }
         }
 
@@ -34,12 +23,6 @@
 
                     .icon {
                         margin-right: 3px;
-                    }
-                }
-
-                .children {
-                    .content {
-                        padding-left: 30px;
                     }
                 }
             }
@@ -70,18 +53,6 @@
 
     .content {
         .link {
-            .children {
-                .content {
-                    background: #27283a;
-                    // padding-left: 30px;
-                    padding-left: 10px;
-
-                    &.active {
-                        background: #191a27;
-                    }
-                }
-            }
-
             .content {
                 display: flex;
                 align-items: center;
@@ -122,7 +93,6 @@
 
                 .title {
                     flex: 1;
-                    // display: none;
                     color: #6d6e7e;
                     transition: 0.3s;
                     max-width: 0px;

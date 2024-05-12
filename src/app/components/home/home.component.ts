@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SidebarComponent } from '../sidebar/sidebar.component';
+import { SidebarComponent } from '../layout/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-home',
@@ -10,5 +10,5 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  sidebarExpanded = true;
+  sidebarExpanded = false;
 }
