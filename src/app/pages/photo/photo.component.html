@@ -1,6 +1,6 @@
 <h1>Photos</h1>
-@for (item of photos; track $index) {
-<h2>{{ item.title }}</h2>
-<img src="{{ item.url }}" alt="{{ item.title }}" />
-<img src="{{ item.thumbnailUrl }}" alt="{{ item.title }}" />
-}
+<div class="img-container">
+  @for (item of photos; track $index) {
+  <app-card [title]="item.title" [imgUrl]="item.thumbnailUrl" />
+  }
+</div>

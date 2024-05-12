@@ -11,5 +11,6 @@
   </div>
   } @else {
   <h1>Album Title: {{ album.title }}</h1>
+  <app-photo [albumId]="album.id" />
   }
 </div>
