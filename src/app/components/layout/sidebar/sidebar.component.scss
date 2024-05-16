@@ -1,12 +1,13 @@
 .sidebar {
     position: fixed;
+    top: 56px;
     left: 0;
-    height: 100vh;
+    height: 100%;
     transition: 0.3s;
     width: 60px;
 
     &.expanded {
-        width: 150px;
+        width: 250px;
 
         .header {
             h1 {
@@ -34,8 +35,8 @@
 
     .header {
         display: flex;
-        align-items: center;
-        justify-content: center;
+        flex-direction: column;
+        justify-content: flex-end;
         padding: 10px;
 
         background: #0f1017;
@@ -54,9 +55,6 @@
     .content {
         .link {
             .content {
-                display: flex;
-                align-items: center;
-                justify-content: center;
                 padding: 10px;
 
                 cursor: pointer;

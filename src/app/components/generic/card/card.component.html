@@ -1,19 +1,19 @@
-<div class="card card-container" style="width: 18rem">
-  <img class="card-img-top" [src]="imgUrl" alt="Card image cap" />
-  <div class="card-body">
-    <h5 class="card-title">{{ title }}</h5>
-    <p class="card-text">
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
-    </p>
-  </div>
-  <ul class="list-group list-group-flush"></ul>
-  <div class="card-body">
-    <a
-      [routerLink]="routerLink"
-      routerLinkActive="router-link-active"
-      class="btn btn-primary"
-      >View</a
-    >
+<div class="container">
+  <div class="card card-container" style="width: 18rem">
+    @if (imgUrl) {
+    <img class="card-img-top" [src]="imgUrl" alt="Card image cap" />
+    }
+    <div class="card-body">
+      <h5 class="card-title">{{ title }}</h5>
+    </div>
+    <ul class="list-group list-group-flush"></ul>
+    <div class="card-body">
+      <a
+        [routerLink]="routerLink"
+        routerLinkActive="router-link-active"
+        class="btn btn-primary"
+        >View</a
+      >
+    </div>
   </div>
 </div>

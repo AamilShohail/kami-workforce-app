@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { SidebarComponent } from '../layout/sidebar/sidebar.component';
 import { EMPTY, switchMap } from 'rxjs';
 import { UserService } from '@app/services/user.service';
 import { User } from '@app/models/user.model';
+import { SummaryComponent } from '@app/pages/summary/summary.component';
+import { ShellComponent } from '../layout/shell/shell.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterModule, SidebarComponent],
+  imports: [RouterModule, SummaryComponent, ShellComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
   sidebarExpanded = false;
-  currentUser!: User;
+  currentUser!: User | null;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -26,7 +27,7 @@ export class HomeComponent implements OnInit {
   }
 
   private subscribeToUserById(): void {
-    this.activatedRoute.paramMap
+    this.activatedRoute.parent?.paramMap
       .pipe(
         switchMap((params) => {
           const userIdFromRoute = Number(params.get('userId'));

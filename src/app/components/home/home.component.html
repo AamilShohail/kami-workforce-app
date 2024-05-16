@@ -1,10 +1,15 @@
-<app-sidebar
-  [isExpanded]="sidebarExpanded"
-  (toggleSidebar)="sidebarExpanded = !sidebarExpanded"
-/>
-@if (currentUser) {
-<div class="title-header">
-  <h1>Hello {{ currentUser.name }}!</h1>
-</div>
-}
-<router-outlet />
+<h1>Hey {{ currentUser?.name }}!</h1>
+<p>Good day</p>
+
+<b>Profile</b>
+<p>Email: {{ currentUser?.email }}</p>
+<p>Username: {{ currentUser?.username }}</p>
+<p>
+  Website: <a [href]="currentUser?.website">{{ currentUser?.website }}</a>
+</p>
+<p>Phone: {{ currentUser?.phone }}</p>
+
+<hr />
+
+<h3>Summary of your album</h3>
+<app-summary [userId]="currentUser?.id" />

@@ -1,6 +1,6 @@
-<app-shell />
 <div class="user-container">
   @if (!currentUser) {
+  <p><b>Select a user to continue</b></p>
   <app-grid
     [colDefs]="colDefs"
     [rowData]="users"

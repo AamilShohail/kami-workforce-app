@@ -11,7 +11,6 @@ import { EMPTY, switchMap, take } from 'rxjs';
   selector: 'app-user',
   standalone: true,
   imports: [GridComponent, ShellComponent],
-  providers: [UserService],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss',
 })

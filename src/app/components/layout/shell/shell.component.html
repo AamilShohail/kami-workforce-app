@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary top-navbar">
+<nav class="navbar navbar-expand-lg bg-body-tertiary top-navbar fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">My album app</a>
     <button
@@ -33,9 +33,20 @@
         </button>
       </form>
       @if (activeUserId) {
-      <button class="btn btn-outline-info" routerLink="./">Switch User</button>
+      <button class="btn btn-outline-info" routerLink="./s">Switch User</button>
       }
     </div>
   </div>
 </nav>
-<router-outlet />
+
+<app-sidebar
+  [isExpanded]="sidebarExpanded"
+  (toggleSidebar)="sidebarExpanded = !sidebarExpanded"
+/>
+<div
+  id="mainWrapper"
+  class="main-wrapper"
+  [ngClass]="sidebarExpanded ? 'main-wrapper__sidebar-expanded' : ''"
+>
+  <router-outlet></router-outlet>
+</div>

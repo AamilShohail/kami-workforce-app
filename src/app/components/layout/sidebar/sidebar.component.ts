@@ -36,13 +36,13 @@ export class SidebarComponent implements OnInit {
   }
 
   private setupNavItems = (): void => {
-    const relativeUrl = `/kami-workforce/user/${this.currentUserId}/home`;
+    const relativeUrl = `/kami-workforce/user/${this.currentUserId}/`;
     this.navItems = [
       {
         id: 'home',
         icon: 'bi bi-house',
         label: 'Dashboard',
-        link: `${relativeUrl}`,
+        link: `${relativeUrl}/home`,
       },
       {
         id: 'setting',

@@ -72,7 +72,7 @@ export class PostComponent implements OnInit {
     this.activatedRoute.parent?.paramMap.subscribe((params: ParamMap) => {
       this.routerLink = `/kami-workforce/user/${Number(
         params.get('userId')
-      )}/home/posts/${post.id}`;
+      )}/posts/${post.id}`;
     });
   }
 }

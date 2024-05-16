@@ -1,6 +1,20 @@
 .top-navbar {
     background: #1d1e2c !important;
-    position: fixed;
     width: 100%;
     top: 0px;
+}
+
+.navbar-brand {
+    color: cornsilk !important;
+}
+
+.main-wrapper {
+    margin-left: 100px;
+    margin-top: 110px;
+    height: calc(100% - 80px);
+    transition: 0.3s;
+
+    &__sidebar-expanded {
+        margin-left: 290px;
+    }
 }

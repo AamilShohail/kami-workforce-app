@@ -35,9 +35,9 @@ export class PhotoComponent implements OnInit {
     this.activatedRoute.parent?.paramMap.pipe(
       take(1),
       map((params: ParamMap) => {
-        return `/kami-workforce/user/${Number(
-          params.get('userId')
-        )}/home/albums/${this.albumId}/photos/${photo.id}`;
+        return `/kami-workforce/user/${Number(params.get('userId'))}/albums/${
+          this.albumId
+        }/photos/${photo.id}`;
       })
     );
 

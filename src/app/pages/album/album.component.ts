@@ -8,7 +8,6 @@ import { EMPTY, Observable, map, switchMap, take } from 'rxjs';
 import { PhotoComponent } from '../photo/photo.component';
 
 @Component({
-  selector: 'app-album',
   standalone: true,
   imports: [CardComponent, CommonModule, PhotoComponent],
   providers: [AlbumService],
@@ -38,9 +37,9 @@ export class AlbumComponent implements OnInit {
     this.activatedRoute.parent?.paramMap.pipe(
       take(1),
       map((params: ParamMap) => {
-        return `/kami-workforce/user/${Number(
-          params.get('userId')
-        )}/home/albums/${album.id}`;
+        return `/kami-workforce/user/${Number(params.get('userId'))}/albums/${
+          album.id
+        }`;
       })
     );
 
